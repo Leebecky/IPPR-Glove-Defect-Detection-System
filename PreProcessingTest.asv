@@ -1,10 +1,10 @@
 img1 = imread("Dataset Images\Cloth Gloves\Cloth-Stain-3.jpg");
-img2 = imread("Dataset Images\Medical Gloves\Unitrile-gloves.png");
+img2 = imread("Dataset Images\Medical Gloves\Medical-Hole-1.png");
 img3 = imread("Dataset Images\Rubber Gloves\Rubber-Hole-1.jpg");
 
 % Convert to Grayscale
 img1_gray = rgb2gray(img1);
-img2_gray = im2gray(img2);
+img2_gray = rgb2gray(img2);
 
 
 % Resize Image to be standard 
@@ -16,11 +16,10 @@ img2_resize = imresize(img2_gray, [480, 480]);
 % img1_sharp = imfilter(img1_resize, sharp_d);
 % img2_sharp = imfilter(img2_resize, sharp_d);
 
-img2_blur = imgaussfilt(img2_resize, 3);
+img2_blur = imgaussfilt(img2_resize, 5);
 
 % Adaptive thresholding
-% % img2_thres = histeq(img2_resize);
-img2_thres = adaptthresh(img2_resize, 0.6, "NeighborhoodSize", 5, "Statistic","gaussian");
+img2_thres = adaptthresh(img2_blur, 0.6);
 
 % Convert to Binary
 % img1_bin = imbinarize(img1_sharp);
